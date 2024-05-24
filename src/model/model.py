@@ -268,7 +268,8 @@ class Net(nn.Module):
         x += pos_emb
 
         res = self.td(x, attention_mask=x_mask)
-        res = torch.softmax(res, dim=2)
+        # res = torch.softmax(res, dim=2)
+        #Pytorch Cross Entropy loss itself apply Softmax so no need to apply here 
 
         loss = self.criterion(
             res[:, self.ep_len :, :].reshape(-1, res.shape[-1]), y.reshape(-1)
